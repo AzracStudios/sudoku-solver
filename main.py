@@ -1,19 +1,36 @@
+import argparse
+
 from grid import Grid
 from shell import *
+from gui import main as gui_main
 
 def main():
-    print(HELP_TEXT)
+    ## ARGPARSE ##
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--text", help="Text Mode", dest="text", action="store_true")
+    parser.add_argument("--gui", help="GUI Mode", dest="gui", action="store_true")
+
+    args = parser.parse_args()
 
     grid = Grid()
-    grid.render_grid()
 
-    exit = False
+    if args.text:
+        print(HELP_TEXT)
+        grid.render_grid()
 
-    while not exit:
-        try:
-            exit = shell(grid)
-        except KeyboardInterrupt:
-            quit()
+        exit = False
+
+        while not exit:
+            try:
+                exit = shell(grid)
+            except KeyboardInterrupt:
+                quit()
+
+    elif args.gui:
+        gui_main()
+
+    else:
+        print("UNRECOGNIZED FLAG!")
 
 if __name__ == "__main__":
     main()

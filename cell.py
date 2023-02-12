@@ -3,6 +3,7 @@ class Cell:
         self.value = value
         self.neighbours = []
         self.position = position
+        self.selected = False
 
     def value_in_neighbour(self):
         for cell in self.neighbours:
@@ -15,3 +16,6 @@ class Cell:
         if self.value != 0:
             return str(self.value)
         return " "
+
+    def __repr__(self):
+        return str(self.position) + "  " + str(self.value)

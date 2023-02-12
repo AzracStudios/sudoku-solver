@@ -1,5 +1,6 @@
 from cell import Cell
 import math
+import time
 
 
 class Grid:
@@ -34,8 +35,8 @@ class Grid:
                         neighbours.append(grid[yi][x])
 
                 # Subgrid
-                start_y = math.floor(y / 3) * 3
-                start_x = math.floor(x / 3) * 3
+                start_y = y - y % 3
+                start_x = x - x % 3
 
                 for k in range(start_y, start_y + 3):
                     for l in range(start_x, start_x + 3):
@@ -64,7 +65,7 @@ class Grid:
 
         return True
 
-    def solve_sudoku(self):
+    def solve_sudoku(self, run_per_ittr=None, fps=None):
         # SOLVE BY BACKTRACKING
         grid = self.grid
         spot = self.get_empty()
@@ -73,15 +74,31 @@ class Grid:
             return True
 
         for i in range(1, 10):
+            if run_per_ittr: run_per_ittr(grid)
             if self.is_valid(spot, i):
                 grid[spot[1]][spot[0]].value = i
 
-                if self.solve_sudoku():
+                if run_per_ittr: 
+                    run_per_ittr(grid)
+                    time.sleep(1/fps)
+
+                if self.solve_sudoku(run_per_ittr=run_per_ittr, fps=fps):
                     return True
 
                 grid[spot[1]][spot[0]].value = 0
 
         return False
+
+    def get_filled_count(self):
+        filled = 0
+
+        for row in self.grid:
+            for cell in row:
+                if cell.value != 0:
+                    filled += 1
+        
+        return filled
+
 
     def render_grid(self):
         grid_string = ""
