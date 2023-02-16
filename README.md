@@ -3,7 +3,12 @@
 ## Introduction
 This is a simple application, in both terminal and gui format, that solves sudoku. Fill the grid with the numbers on a valid sudoku grid, and watch the backtracking algorithm solve the board!
 
+![Terminal](./git_assets/terminal_1.png)
+
+
 ## Backtracking algorithm
+![Algorithm Visualisation](./git_assets/sudoku.gif)
+
 Backtracking is a recursive approach for finding solutions to some computational problems. Backtracking gradually finds candidate solutions and abandons candidates, i.e., "backtracks" when a candidate cannot be a good solution.
 
 ## Run the application

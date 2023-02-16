@@ -21,7 +21,7 @@ def main():
     grid = Grid()
 
     def render(_grid):
-        SCREEN.fill((10, 10, 10))
+        SCREEN.fill((100, 100, 100))
 
         for x, row in enumerate(_grid):
             for y, cell in enumerate(row):
@@ -39,7 +39,7 @@ def main():
                                  (240, 240, 240), cell_rect)
 
                 ## TEXT ##
-                color = (0, 0, 0) if cell.selected == True else (100, 100, 100)
+                color = (0, 0, 0) if cell.selected == True else (70, 70, 70)
                 text = FONT.render(cell.as_string(), True, color)
                 text_rect = text.get_rect()
                 text_rect.center = ((x * CELL_WIDTH) +
